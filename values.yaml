@@ -1,0 +1,61 @@
+mode: distributed
+
+persistence:
+  enabled: true
+  storageClass: local-path
+  size: 3000Gi
+
+etcd:
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 200Gi
+
+minio:
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 1000Gi
+
+dataNode:
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 2000Gi
+
+indexNode:
+  resources:
+    limits:
+      nvidia.com/gpu: 1    ## For Assigning GPU to milvus
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 1000Gi
+
+
+queryNode:
+  resources:
+    limits:
+      nvidia.com/gpu: 1   ## for assigning GPU to milvus
+  enabled: true
+  persistence:
+    enabled: true
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 1000Gi
+
+pulsar:
+  enabled: true
+  bookkeeper:
+    persistence:
+      storageClass: local-path
+      size: 1000Gi
+  zookeeper:
+    persistence:
+      storageClass: local-path
+      size: 200Gi
+
+config:
+  common:
+    securityConfig:
+      enableAuthorization: true
