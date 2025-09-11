@@ -1,4 +1,4 @@
-In standalone milvus it is lost connection when so many number of data is inserted in batch. I.e. around more then 1000+. so in that case we required distributed setup.
+In standalone milvus it is lost connection when so many number of data is inserted in batch. I.e. around more then 1000+. so in that case we required distributed setup. <br>
 Ref link - https://milvus.io/docs/install_cluster-milvusoperator.md
 
 #### Helm installation
