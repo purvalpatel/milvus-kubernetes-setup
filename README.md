@@ -29,7 +29,8 @@ volumeBindingMode: WaitForFirstConsumer
 https://raw.githubusercontent.com/purvalpatel/milvus-kubernetes-setup/7b55267b22ba4c077b0e0d58604205a5fe28d978/values.yaml
 ```
 Note: <br>
-By default the storage class location is /opt/local-path-provisioner. If you wanted to change it to /Data2/local-path-provisioner. <br>
+By default the storage class location is /opt/local-path-provisioner.<br>
+If you wanted to change it to /Data2/local-path-provisioner. <br>
 
 ##### Edit custom the local-path-storage.
 ```
