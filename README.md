@@ -133,3 +133,11 @@ queryNode:
       cache:
         memoryLimit: 12GB
 ```
+Upgrade helm milvus:
+```
+helm upgrade milvus milvus/milvus -n milvus -f values.yaml
+````
+Rollout restart querynode:
+```
+kubectl rollout restart deployment querynode -n milvus
+```
