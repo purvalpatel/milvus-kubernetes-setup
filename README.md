@@ -97,3 +97,39 @@ Rollout new version of milvus with helm:
 helm upgrade milvus milvus/milvus -n milvus-operator -f values.yaml
 ```
 Setup is completed.
+
+
+Troubleshooting:
+-------------------
+**Issue 1**: RAM is keep increasing of querynode. <br>
+
+**Reason**: QueryNode is loading vector segments from disk and Linux is caching them in RAM (PageCache). <br>
+This makes it look like Milvus is consuming memory, but actually the Linux kernel is using RAM for caching, not Milvus allocating memory internally. <br>
+
+For that you need to limit mmap.<br>
+```YAML
+queryNode:
+  ## added this by purval because of RAM caching issue
+  extraConfigFiles:
+    user.yaml: |
+      storage:
+        mmapEnabled: true
+        mmapBufferSize: 14GiB
+  ## added this by purval because of RAM caching issue
+  replicaCount: 3
+  enabled: true
+  resources:
+    limits:
+      amd.com/gpu: 1
+  persistence:
+    enabled: true
+    storageClass: local-path
+    accessMode: ReadWriteOnce
+    size: 1000Gi
+  config:
+    # Increase cache memory for holding segments
+#    queryNode.cache.memoryLimit: "12GB"
+    queryNode:
+      cache:
+        memoryLimit: 12GB
+```
